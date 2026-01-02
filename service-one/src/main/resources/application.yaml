@@ -1,0 +1,14 @@
+server:
+  servlet:
+    context-path: /api
+  port: 8001
+
+spring:
+  application:
+    name: service-one
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    com.logging.presentation: DEBUG
