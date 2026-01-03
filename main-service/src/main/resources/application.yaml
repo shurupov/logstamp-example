@@ -18,6 +18,7 @@ logging:
   level:
     root: ERROR
     org.springframework: ERROR
+    org.zalando.logbook: TRACE
     com.logging.presentation: DEBUG
 
 feign:

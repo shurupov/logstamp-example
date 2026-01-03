@@ -7,7 +7,7 @@
 
     <groupId>com.logging.presentation</groupId>
     <artifactId>logging-presentation-demo-project</artifactId>
-    <version>1.0</version>
+    <version>2.0</version>
     <name>logging-presentation</name>
     <description>Logging demo project for Spring Boot</description>
     <packaging>pom</packaging>
@@ -16,6 +16,7 @@
         <java.version>21</java.version>
         <spring-boot.version>3.5.9</spring-boot.version>
         <spring-cloud.version>2025.0.1</spring-cloud.version>
+        <logbook.version>3.12.3</logbook.version>
     </properties>
 
     <dependencyManagement>
@@ -34,6 +35,13 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>org.zalando</groupId>
+                <artifactId>logbook-bom</artifactId>
+                <version>${logbook.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -41,6 +49,7 @@
         <module>main-service</module>
         <module>client-service</module>
         <module>api</module>
+        <module>logging-starter</module>
     </modules>
 
 </project>

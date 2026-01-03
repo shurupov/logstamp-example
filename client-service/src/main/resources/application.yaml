@@ -10,4 +10,5 @@ spring:
 logging:
   level:
     root: INFO
+    org.zalando.logbook: TRACE
     com.logging.presentation: DEBUG
