@@ -1,10 +1,9 @@
-package com.logging.presentation.service_one.controller.request;
+package com.logging.presentation.api.request;
 
 import lombok.Data;
 
 @Data
-public class StartClaimRequest {
-
+public class ServiceOneStartClaimRequest {
     private String param1;
     private String param2;
     private String param3;

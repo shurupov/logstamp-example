@@ -1,26 +1,25 @@
 package com.logging.presentation.service_one.controller;
 
-import com.logging.presentation.service_one.controller.request.StartClaimRequest;
-import com.logging.presentation.service_one.controller.response.ClaimIdResponse;
+import com.logging.presentation.api.ServiceOneApi;
+import com.logging.presentation.api.request.ServiceOneStartClaimRequest;
+import com.logging.presentation.api.response.ServiceOneStartClaimResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.jboss.logging.MDC;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
 
 @Slf4j
 @RestController
-public class ClaimController {
+public class ClaimController implements ServiceOneApi {
 
-    @PostMapping("/claims")
-    public ClaimIdResponse start(@RequestBody StartClaimRequest startClaimRequest) {
+    @Override
+    public ServiceOneStartClaimResponse start(ServiceOneStartClaimRequest startClaimRequest) {
         UUID claimId = UUID.randomUUID();
         MDC.put("claimId", claimId.toString());
         log.info("Получено {}", startClaimRequest);
         log.error("Исключение", new RuntimeException("Что-то пошло не так"));
         MDC.remove("claimId");
-        return new ClaimIdResponse(claimId);
+        return new ServiceOneStartClaimResponse(claimId);
     }
 }
