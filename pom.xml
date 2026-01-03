@@ -6,10 +6,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.logging.presentation</groupId>
-    <artifactId>parent-project</artifactId>
+    <artifactId>logging-presentation-demo-project</artifactId>
     <version>1.0</version>
     <name>logging-presentation</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Logging demo project for Spring Boot</description>
     <packaging>pom</packaging>
 
     <properties>
@@ -38,7 +38,8 @@
     </dependencyManagement>
 
     <modules>
-        <module>service-one</module>
+        <module>main-service</module>
+        <module>client-service</module>
         <module>api</module>
     </modules>
 

@@ -1,14 +1,16 @@
 package com.logging.presentation.api.response;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ServiceOneStartClaimResponse {
-    private UUID claimId;
+@Builder
+public class ClientServiceClientResponse {
+    private Long clientId;
+    private String lastName;
+    private String firstName;
 }

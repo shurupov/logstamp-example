@@ -1,11 +1,11 @@
 server:
   servlet:
     context-path: /api
-  port: 8001
+  port: 8002
 
 spring:
   application:
-    name: service-one
+    name: client-service
 
 logging:
   level:

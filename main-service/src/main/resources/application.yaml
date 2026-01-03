@@ -1,0 +1,24 @@
+server:
+  servlet:
+    context-path: /api
+  port: 8001
+
+spring:
+  application:
+    name: main-service
+
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            loggerLevel: full
+
+logging:
+  level:
+    root: ERROR
+    org.springframework: ERROR
+    com.logging.presentation: DEBUG
+
+feign:
+  service-two: http://localhost:8002/api
