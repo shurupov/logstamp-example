@@ -1,6 +1,7 @@
 package com.logging.presentation.main.service.controller;
 
 import com.logging.presentation.api.MainServiceApi;
+import com.logging.presentation.api.kafka.ClaimEvent;
 import com.logging.presentation.api.request.DeliveryCompletedCallbackRequest;
 import com.logging.presentation.api.request.MainServiceStartClaimRequest;
 import com.logging.presentation.api.response.ClientAdapterClientResponse;
@@ -34,7 +35,7 @@ public class ClaimController implements MainServiceApi {
         ClientAdapterClientResponse client = clientAdapterClient.getClient(startClaimRequest.getClientId());
         deliveryService.startDelivery(claimId, client);
         scheduledService.addJob(claimId, "Тестовый текст");
-        kafkaProducer.sendMessage(new KafkaProducer.ClaimEvent(claimId, "Текст сообщения"));
+        kafkaProducer.sendMessage(new ClaimEvent(claimId, "Текст сообщения"));
         return new MainServiceOneStartClaimResponse(claimId);
     }
 

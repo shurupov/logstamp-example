@@ -49,6 +49,7 @@
 
     <modules>
         <module>main-service</module>
+        <module>consumer-service</module>
         <module>client-adapter</module>
         <module>delivery-adapter</module>
         <module>external-system</module>

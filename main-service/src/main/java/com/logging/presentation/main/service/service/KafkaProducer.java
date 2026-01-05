@@ -1,15 +1,13 @@
 package com.logging.presentation.main.service.service;
 
+import com.logging.presentation.api.kafka.ClaimEvent;
 import com.logging.presentation.logging.starter.cross.identifier.ContextHolder;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
-
-import java.util.UUID;
 
 @Component
 @Slf4j
@@ -27,12 +25,5 @@ public class KafkaProducer {
         ProducerRecord<String, ClaimEvent> producerRecord = new ProducerRecord<>(kafkaTopic, claimId, claimEvent);
         contextHolder.addKafkaHeaders(producerRecord);
         kafkaTemplate.send(producerRecord);
-    }
-
-    @RequiredArgsConstructor
-    @Getter
-    public static class ClaimEvent {
-        private final UUID claimId;
-        private final String content;
     }
 }
