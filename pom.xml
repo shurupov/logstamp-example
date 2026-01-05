@@ -7,7 +7,7 @@
 
     <groupId>com.logging.presentation</groupId>
     <artifactId>logging-presentation-demo-project</artifactId>
-    <version>5.0</version>
+    <version>6.0</version>
     <name>logging-presentation</name>
     <description>Logging demo project for Spring Boot</description>
     <packaging>pom</packaging>

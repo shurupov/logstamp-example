@@ -20,6 +20,7 @@ logging:
     org.springframework: ERROR
     org.zalando.logbook: TRACE
     com.logging.presentation: DEBUG
+    com.logging.presentation.logging.starter: TRACE
 
 feign:
   client-adapter: http://localhost:8002/api

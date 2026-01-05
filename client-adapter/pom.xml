@@ -5,10 +5,10 @@
     <parent>
         <groupId>com.logging.presentation</groupId>
         <artifactId>logging-presentation-demo-project</artifactId>
-        <version>5.0</version>
+        <version>6.0</version>
     </parent>
     <artifactId>client-adapter</artifactId>
-    <version>5.0</version>
+    <version>6.0</version>
     <name>client-adapter</name>
     <description>Demo project for Spring Boot</description>
 
@@ -16,6 +16,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
         </dependency>
 
         <dependency>
@@ -44,13 +49,13 @@
         <dependency>
             <groupId>com.logging.presentation</groupId>
             <artifactId>api</artifactId>
-            <version>5.0</version>
+            <version>6.0</version>
         </dependency>
 
         <dependency>
             <groupId>com.logging.presentation</groupId>
             <artifactId>logging-starter</artifactId>
-            <version>5.0</version>
+            <version>6.0</version>
         </dependency>
     </dependencies>
 

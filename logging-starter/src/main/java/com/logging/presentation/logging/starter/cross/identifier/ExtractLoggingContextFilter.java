@@ -46,7 +46,7 @@ public class ExtractLoggingContextFilter extends OncePerRequestFilter {
     }
 
     private void addEntriesToContext(CachedBodyHttpServletRequest request) {
-
+        contextHolder.addInitiator("rest");
         for (String headerName: Collections.list(request.getHeaderNames())) {
             if (!headerName.startsWith(headerNamePrefix)) {
                 continue;

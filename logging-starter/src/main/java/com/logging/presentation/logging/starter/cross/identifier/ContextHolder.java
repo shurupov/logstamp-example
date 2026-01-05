@@ -9,7 +9,13 @@ import java.util.Map;
 @Component
 public class ContextHolder {
 
+    private static final String INITIATOR_FIELD_NAME = "initiator";
+
     private final ThreadLocal<Map<String, String>> context = new ThreadLocal<>();
+
+    public void addInitiator(String initiator) {
+        MDC.put(INITIATOR_FIELD_NAME, initiator);
+    }
 
     public Map<String, String> get() {
         if (context.get() == null) {
@@ -33,6 +39,7 @@ public class ContextHolder {
         for (String contextEntryKey : get().keySet()) {
             MDC.remove(contextEntryKey);
         }
+        MDC.remove(INITIATOR_FIELD_NAME);
         context.remove();
     }
 }
