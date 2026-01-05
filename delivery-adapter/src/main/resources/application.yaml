@@ -1,0 +1,27 @@
+server:
+  servlet:
+    context-path: /api
+  port: 8003
+
+spring:
+  application:
+    name: delivery-adapter
+
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            loggerLevel: full
+      okhttp:
+        enabled: true
+
+logging:
+  level:
+    root: INFO
+    org.zalando.logbook: TRACE
+    com.logging.presentation: DEBUG
+
+feign:
+  main-service: http://localhost:8001/api
+  external-system: http://localhost:8081/api

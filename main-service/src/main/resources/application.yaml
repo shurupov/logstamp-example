@@ -1,0 +1,34 @@
+server:
+  servlet:
+    context-path: /api
+  port: 8001
+
+spring:
+  application:
+    name: main-service
+
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            loggerLevel: full
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+
+logging:
+  level:
+    root: ERROR
+    org.springframework: ERROR
+    org.zalando.logbook: TRACE
+    com.logging.presentation: DEBUG
+    com.logging.presentation.logging.starter: TRACE
+
+feign:
+  client-adapter: http://localhost:8002/api
+  delivery-adapter: http://localhost:8003/api
