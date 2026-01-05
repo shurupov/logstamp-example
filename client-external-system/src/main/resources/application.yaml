@@ -1,0 +1,14 @@
+server:
+  servlet:
+    context-path: /api
+  port: 8081
+
+spring:
+  application:
+    name: client-external-system
+
+logging:
+  level:
+    root: INFO
+    org.zalando.logbook: TRACE
+    com.logging.presentation: DEBUG

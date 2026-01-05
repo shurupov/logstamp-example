@@ -1,11 +1,11 @@
 server:
   servlet:
     context-path: /api
-  port: 8001
+  port: 8002
 
 spring:
   application:
-    name: main-service
+    name: client-adapter
 
   cloud:
     openfeign:
@@ -16,10 +16,9 @@ spring:
 
 logging:
   level:
-    root: ERROR
-    org.springframework: ERROR
+    root: INFO
     org.zalando.logbook: TRACE
     com.logging.presentation: DEBUG
 
 feign:
-  client-adapter: http://localhost:8002/api
+  client-external-system: http://localhost:8081/api

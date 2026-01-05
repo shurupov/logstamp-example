@@ -7,7 +7,7 @@
 
     <groupId>com.logging.presentation</groupId>
     <artifactId>logging-presentation-demo-project</artifactId>
-    <version>2.0</version>
+    <version>3.0</version>
     <name>logging-presentation</name>
     <description>Logging demo project for Spring Boot</description>
     <packaging>pom</packaging>
@@ -47,7 +47,8 @@
 
     <modules>
         <module>main-service</module>
-        <module>client-service</module>
+        <module>client-adapter</module>
+        <module>client-external-system</module>
         <module>api</module>
         <module>logging-starter</module>
     </modules>
