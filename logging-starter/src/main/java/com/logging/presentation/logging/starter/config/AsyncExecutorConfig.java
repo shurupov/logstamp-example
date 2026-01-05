@@ -18,6 +18,7 @@ import java.util.Map;
 @Configuration
 @RequiredArgsConstructor
 @ConditionalOnBean(value = AsyncAnnotationBeanPostProcessor.class)
+//TODO Перетащить этот конфиг с соседним AsyncConfig в отдельный стартер
 public class AsyncExecutorConfig {
 
     private final ContextHolder contextHolder;

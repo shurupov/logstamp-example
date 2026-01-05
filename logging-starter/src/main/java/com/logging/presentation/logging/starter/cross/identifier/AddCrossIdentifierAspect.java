@@ -17,6 +17,7 @@ import java.lang.reflect.Field;
 @Component
 @Slf4j
 @RequiredArgsConstructor
+//TODO Перетащить этот аспект в отдельный стартер
 public class AddCrossIdentifierAspect {
 
     private final ObjectMapper objectMapper;

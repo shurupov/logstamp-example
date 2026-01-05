@@ -9,6 +9,7 @@ import com.logging.presentation.logging.starter.cross.identifier.ContextHolder;
 import com.logging.presentation.main.service.feign.ClientAdapterClient;
 import com.logging.presentation.main.service.scheduled.ScheduledService;
 import com.logging.presentation.main.service.service.DeliveryService;
+import com.logging.presentation.main.service.service.KafkaProducer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,7 @@ public class ClaimController implements MainServiceApi {
     private final DeliveryService deliveryService;
     private final ScheduledService scheduledService;
     private final ContextHolder contextHolder;
+    private final KafkaProducer kafkaProducer;
 
     @Override
     public MainServiceOneStartClaimResponse start(MainServiceStartClaimRequest startClaimRequest) {
@@ -32,6 +34,7 @@ public class ClaimController implements MainServiceApi {
         ClientAdapterClientResponse client = clientAdapterClient.getClient(startClaimRequest.getClientId());
         deliveryService.startDelivery(claimId, client);
         scheduledService.addJob(claimId, "Тестовый текст");
+        kafkaProducer.sendMessage(new KafkaProducer.ClaimEvent(claimId, "Текст сообщения"));
         return new MainServiceOneStartClaimResponse(claimId);
     }
 

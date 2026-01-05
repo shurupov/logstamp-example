@@ -1,8 +1,10 @@
 package com.logging.presentation.logging.starter.cross.identifier;
 
+import org.apache.kafka.clients.producer.ProducerRecord;
 import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +14,13 @@ public class ContextHolder {
     private static final String INITIATOR_FIELD_NAME = "initiator";
 
     private final ThreadLocal<Map<String, String>> context = new ThreadLocal<>();
+
+    //TODO Перетащить этот метод в отдельный бин и стартер (а может и вызов его - в аспект)
+    public void addKafkaHeaders(ProducerRecord<String, ?> record) {
+        for (Map.Entry<String, String> contextEntries : get().entrySet()) {
+            record.headers().add(contextEntries.getKey(), contextEntries.getValue().getBytes(StandardCharsets.UTF_8));
+        }
+    }
 
     public void addInitiator(String initiator) {
         MDC.put(INITIATOR_FIELD_NAME, initiator);
