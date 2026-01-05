@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.task.TaskExecutor;
+import org.springframework.scheduling.annotation.AsyncAnnotationBeanPostProcessor;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 
 import java.util.concurrent.Executor;
@@ -14,7 +15,7 @@ import java.util.concurrent.Executor;
 @Configuration
 @Slf4j
 @RequiredArgsConstructor
-@ConditionalOnBean(value = AsyncExecutorConfig.class)
+@ConditionalOnBean(value = AsyncAnnotationBeanPostProcessor.class)
 public class AsyncConfig implements AsyncConfigurer {
 
     @Qualifier("asyncTaskExecutor")
