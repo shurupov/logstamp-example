@@ -9,6 +9,6 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ServiceOneStartClaimResponse {
+public class MainServiceOneStartClaimResponse {
     private UUID claimId;
 }

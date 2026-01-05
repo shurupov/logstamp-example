@@ -15,6 +15,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 
 import static com.logging.presentation.logging.starter.cross.identifier.IdentifierConverter.toCamelCase;
 
@@ -28,25 +29,32 @@ public class ExtractLoggingContextFilter extends OncePerRequestFilter {
     @Value("${logging-context.header-name-prefix:x-}")
     private final String headerNamePrefix;
     private final ContextHolder contextHolder;
+    private final List<CustomIdentifierExtractor> customIdentifierExtractors;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
-        addEntriesToContext(request);
+
+        CachedBodyHttpServletRequest requestWrapper = new CachedBodyHttpServletRequest(request);
+
+        addEntriesToContext(requestWrapper);
         try {
-            filterChain.doFilter(request, response);
+            filterChain.doFilter(requestWrapper, response);
         } finally {
             contextHolder.clear();
         }
     }
 
-    private void addEntriesToContext(HttpServletRequest request) {
+    private void addEntriesToContext(CachedBodyHttpServletRequest request) {
 
         for (String headerName: Collections.list(request.getHeaderNames())) {
             if (!headerName.startsWith(headerNamePrefix)) {
                 continue;
             }
             extractFromHeader(headerName, request);
+        }
+        for(CustomIdentifierExtractor extractor : customIdentifierExtractors) {
+            contextHolder.add(extractor.extract(request));
         }
     }
 

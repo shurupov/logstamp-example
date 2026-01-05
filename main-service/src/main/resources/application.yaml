@@ -23,3 +23,4 @@ logging:
 
 feign:
   client-adapter: http://localhost:8002/api
+  delivery-adapter: http://localhost:8003/api

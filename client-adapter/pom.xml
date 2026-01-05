@@ -5,10 +5,10 @@
     <parent>
         <groupId>com.logging.presentation</groupId>
         <artifactId>logging-presentation-demo-project</artifactId>
-        <version>3.0</version>
+        <version>4.0</version>
     </parent>
     <artifactId>client-adapter</artifactId>
-    <version>3.0</version>
+    <version>4.0</version>
     <name>client-adapter</name>
     <description>Demo project for Spring Boot</description>
 
@@ -44,13 +44,13 @@
         <dependency>
             <groupId>com.logging.presentation</groupId>
             <artifactId>api</artifactId>
-            <version>3.0</version>
+            <version>4.0</version>
         </dependency>
 
         <dependency>
             <groupId>com.logging.presentation</groupId>
             <artifactId>logging-starter</artifactId>
-            <version>3.0</version>
+            <version>4.0</version>
         </dependency>
     </dependencies>
 

@@ -1,11 +1,11 @@
 server:
   servlet:
     context-path: /api
-  port: 8002
+  port: 8003
 
 spring:
   application:
-    name: client-adapter
+    name: delivery-adapter
 
   cloud:
     openfeign:
@@ -13,6 +13,8 @@ spring:
         config:
           default:
             loggerLevel: full
+      okhttp:
+        enabled: true
 
 logging:
   level:
@@ -21,4 +23,5 @@ logging:
     com.logging.presentation: DEBUG
 
 feign:
+  main-service: http://localhost:8001/api
   external-system: http://localhost:8081/api

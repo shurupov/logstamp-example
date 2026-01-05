@@ -13,4 +13,6 @@ public class ClientAdapterClientResponse {
     private Long clientId;
     private String lastName;
     private String firstName;
+    private String phone;
+    private String address;
 }
