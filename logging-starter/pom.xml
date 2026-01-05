@@ -5,10 +5,10 @@
     <parent>
         <groupId>com.logging.presentation</groupId>
         <artifactId>logging-presentation-demo-project</artifactId>
-        <version>4.0</version>
+        <version>5.0</version>
     </parent>
     <artifactId>logging-starter</artifactId>
-    <version>4.0</version>
+    <version>5.0</version>
     <name>logging-starter</name>
     <description>Demo project for Spring Boot</description>
 
