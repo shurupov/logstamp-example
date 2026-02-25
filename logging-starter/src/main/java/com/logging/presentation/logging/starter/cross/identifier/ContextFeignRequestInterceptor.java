@@ -14,7 +14,7 @@ import static com.logging.presentation.logging.starter.cross.identifier.Identifi
 @Component
 public class ContextFeignRequestInterceptor implements RequestInterceptor {
 
-    @Value("${logging-context.header-name-prefix:x-}")
+    @Value("${logging-context.header-name-prefix:x-id-}")
     private final String headerNamePrefix;
     private final ContextHolder contextHolder;
 

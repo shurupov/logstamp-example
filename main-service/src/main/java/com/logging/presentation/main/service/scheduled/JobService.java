@@ -11,7 +11,7 @@ import java.util.UUID;
 @Slf4j
 public class JobService {
 
-    @AddIdentifiers(initiator = "scheduler", objectFieldName = "job")
+    @AddIdentifiers(initiator = "scheduler")
     public void doJob(Job job) {
         log.info("Выполнение запланированной задачи: {}: {}", job.getClaimId(), job.getText());
     }
