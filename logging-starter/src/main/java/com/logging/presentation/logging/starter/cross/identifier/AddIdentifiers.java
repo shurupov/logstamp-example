@@ -7,8 +7,7 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface AddCrossIdentifier {
+public @interface AddIdentifiers {
     String objectFieldName();
-    String identifierFieldName();
     String initiator();
 }

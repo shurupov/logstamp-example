@@ -29,7 +29,7 @@ public class ExtractLoggingContextFilter extends OncePerRequestFilter {
     @Value("${logging-context.header-name-prefix:x-}")
     private final String headerNamePrefix;
     private final ContextHolder contextHolder;
-    private final List<CustomIdentifierExtractor> customIdentifierExtractors;
+    private final List<HttpRequestIdentifierExtractor> httpRequestIdentifierExtractors;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
@@ -53,7 +53,7 @@ public class ExtractLoggingContextFilter extends OncePerRequestFilter {
             }
             extractFromHeader(headerName, request);
         }
-        for(CustomIdentifierExtractor extractor : customIdentifierExtractors) {
+        for(HttpRequestIdentifierExtractor extractor : httpRequestIdentifierExtractors) {
             contextHolder.add(extractor.extract(request));
         }
     }

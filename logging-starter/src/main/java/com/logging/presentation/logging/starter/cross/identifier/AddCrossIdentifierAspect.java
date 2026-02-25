@@ -1,17 +1,15 @@
 package com.logging.presentation.logging.starter.cross.identifier;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.lang.reflect.Method;
+import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
-
-import java.lang.reflect.Field;
 
 @Aspect
 @Component
@@ -20,18 +18,18 @@ import java.lang.reflect.Field;
 //TODO Перетащить этот аспект в отдельный стартер
 public class AddCrossIdentifierAspect {
 
-    private final ObjectMapper objectMapper;
     private final ContextHolder contextHolder;
+    private final List<IdentifierExtractor<?>> identifierExtractors;
 
-    @Around("@annotation(AddCrossIdentifier)")
+    @Around("@annotation(com.logging.presentation.logging.starter.cross.identifier.AddIdentifiers)")
     public Object addCrossIdentifier(ProceedingJoinPoint joinPoint) throws Throwable {
         try {
             if (joinPoint.getArgs().length > 0) {
-                Object event = joinPoint.getArgs()[0];
-                AddCrossIdentifier annotation = ((MethodSignature) joinPoint.getSignature()).getMethod().getAnnotation(AddCrossIdentifier.class);
+                Object argument = joinPoint.getArgs()[0];
+                Method method = ((MethodSignature) joinPoint.getSignature()).getMethod();
+                AddIdentifiers annotation = method.getAnnotation(AddIdentifiers.class);
                 contextHolder.addInitiator(annotation.initiator());
-                addIdentifier(event, annotation.identifierFieldName());
-                logObject(event, annotation.objectFieldName());
+                addIdentifiers(argument);
             }
             return joinPoint.proceed();
         } finally {
@@ -39,27 +37,16 @@ public class AddCrossIdentifierAspect {
         }
     }
 
-    //TODO Перетащить в отдельный класс/бин/абстрактный класс
-    private void logObject(Object event, String logFieldName) {
-        String prettyEvent;
-        try {
-            prettyEvent = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(event);
-        } catch (JsonProcessingException e) {
-            prettyEvent = event != null ? event.toString() : null;
+    private void addIdentifiers(Object event) {
+      for (IdentifierExtractor<?> extractor : identifierExtractors) {
+        if (extractor.canExtract(event)) {
+          try {
+            Map<String, String> extracted = extractor.extract(event);
+            contextHolder.add(extracted);
+          } catch (Exception e) {
+            log.warn("Не удалось извлечь идентификаторы", e);
+          }
         }
-        MDC.put(logFieldName, prettyEvent);
-        log.trace("Получено {}", event != null ? event.getClass().getSimpleName() : null);
-        MDC.remove(logFieldName);
-    }
-
-    private void addIdentifier(Object event, String logIdentifierFieldName) {
-        try {
-            Field field = event.getClass().getDeclaredField(logIdentifierFieldName);
-            field.setAccessible(true);
-            String value = field.get(event).toString();
-            MDC.put(logIdentifierFieldName, value);
-        } catch (Exception e) {
-            log.warn("Не удалось получить поле {}", logIdentifierFieldName, e);
-        }
+      }
     }
 }
