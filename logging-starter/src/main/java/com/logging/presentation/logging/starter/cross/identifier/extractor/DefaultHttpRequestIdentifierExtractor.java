@@ -1,7 +1,8 @@
-package com.logging.presentation.logging.starter.cross.identifier;
+package com.logging.presentation.logging.starter.cross.identifier.extractor;
 
 import static com.logging.presentation.logging.starter.cross.identifier.IdentifierConverter.toCamelCase;
 
+import com.logging.presentation.logging.starter.cross.identifier.CachedBodyHttpServletRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Collections;
 import java.util.HashMap;

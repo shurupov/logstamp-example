@@ -1,7 +1,7 @@
 package com.logging.presentation.client.service.controller;
 
 import com.logging.presentation.logging.starter.cross.identifier.CachedBodyHttpServletRequest;
-import com.logging.presentation.logging.starter.cross.identifier.HttpRequestIdentifierExtractor;
+import com.logging.presentation.logging.starter.cross.identifier.extractor.HttpRequestIdentifierExtractor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

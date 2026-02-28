@@ -1,13 +1,12 @@
 package com.logging.presentation.logging.starter.cross.identifier;
 
+import com.logging.presentation.logging.starter.cross.identifier.extractor.IdentifierExtractor;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.clients.producer.ProducerRecord;
 import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,12 +19,6 @@ public class ContextHolder {
 
   private final ThreadLocal<Map<String, String>> context = new ThreadLocal<>();
   private final List<IdentifierExtractor<?>> identifierExtractors;
-
-  public void addKafkaHeaders(ProducerRecord<String, ?> record) {
-    for (Map.Entry<String, String> contextEntries : get().entrySet()) {
-      record.headers().add(contextEntries.getKey(), contextEntries.getValue().getBytes(StandardCharsets.UTF_8));
-    }
-  }
 
   public void addInitiator(String initiator) {
     MDC.put(INITIATOR_FIELD_NAME, initiator);

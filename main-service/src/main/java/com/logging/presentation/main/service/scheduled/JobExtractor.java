@@ -1,6 +1,6 @@
 package com.logging.presentation.main.service.scheduled;
 
-import com.logging.presentation.logging.starter.cross.identifier.IdentifierExtractor;
+import com.logging.presentation.logging.starter.cross.identifier.extractor.IdentifierExtractor;
 import com.logging.presentation.main.service.scheduled.JobService.Job;
 import java.util.Map;
 import org.springframework.stereotype.Component;

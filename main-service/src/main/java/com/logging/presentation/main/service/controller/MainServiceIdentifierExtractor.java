@@ -2,7 +2,7 @@ package com.logging.presentation.main.service.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.logging.presentation.logging.starter.cross.identifier.CachedBodyHttpServletRequest;
-import com.logging.presentation.logging.starter.cross.identifier.HttpRequestIdentifierExtractor;
+import com.logging.presentation.logging.starter.cross.identifier.extractor.HttpRequestIdentifierExtractor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

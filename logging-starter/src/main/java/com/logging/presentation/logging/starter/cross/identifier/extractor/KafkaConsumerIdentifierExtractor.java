@@ -1,4 +1,4 @@
-package com.logging.presentation.logging.starter.cross.identifier;
+package com.logging.presentation.logging.starter.cross.identifier.extractor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,7 +7,7 @@ import org.apache.kafka.common.header.Header;
 import org.springframework.stereotype.Component;
 
 @Component
-public class KafkaConsumerIdentifierExtractor implements IdentifierExtractor<ConsumerRecord<String, ?>> {
+public class KafkaConsumerIdentifierExtractor implements IdentifierExtractor<ConsumerRecord<Object, ?>> {
 
   @Override
   public boolean canExtract(Object container) {
@@ -15,7 +15,7 @@ public class KafkaConsumerIdentifierExtractor implements IdentifierExtractor<Con
   }
 
   @Override
-  public Map<String, String> typedExtract(ConsumerRecord<String, ?> consumerRecord) {
+  public Map<String, String> typedExtract(ConsumerRecord<Object, ?> consumerRecord) {
     Map<String, String> extracted = new HashMap<>();
 
     for (Header header : consumerRecord.headers()) {
