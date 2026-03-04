@@ -1,4 +1,4 @@
-package com.logging.presentation.client.service;
+package com.logging.presentation.external.system;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

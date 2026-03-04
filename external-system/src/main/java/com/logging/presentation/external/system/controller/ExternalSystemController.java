@@ -1,4 +1,4 @@
-package com.logging.presentation.delivery.adapter.config.controller;
+package com.logging.presentation.external.system.controller;
 
 import com.logging.presentation.api.ExternalSystemApi;
 import com.logging.presentation.api.request.StartDeliveryRequest;
