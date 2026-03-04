@@ -1,7 +1,7 @@
-package com.logging.presentation.client.service.controller;
+package com.logging.presentation.delivery.adapter.controller;
 
-import com.logging.presentation.logging.starter.cross.identifier.CachedBodyHttpServletRequest;
-import com.logging.presentation.logging.starter.cross.identifier.extractor.HttpRequestIdentifierExtractor;
+import io.github.shurupov.logstamp.CachedBodyHttpServletRequest;
+import io.github.shurupov.logstamp.extractor.HttpRequestStampExtractor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class FromDeliveryIdentifierExtractor implements HttpRequestIdentifierExtractor {
+public class FromDeliveryIdentifierExtractor implements HttpRequestStampExtractor {
 
     private static final Pattern URL_CALLBACK_PATTERN = Pattern.compile("/v1/deliveries/([^/]+)/delivered");
 

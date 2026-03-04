@@ -1,6 +1,6 @@
 package com.logging.presentation.main.service.scheduled;
 
-import com.logging.presentation.logging.starter.cross.identifier.AddIdentifiers;
+import io.github.shurupov.logstamp.aspect.AddStamps;
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ import java.util.UUID;
 @Slf4j
 public class JobService {
 
-    @AddIdentifiers(initiator = "scheduler")
+    @AddStamps(initiator = "scheduler")
     public void doJob(Job job) {
         log.info("Выполнение запланированной задачи: {}: {}", job.getClaimId(), job.getText());
     }

@@ -35,10 +35,10 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
 
-        <!--<dependency>
+        <dependency>
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
-        </dependency>-->
+        </dependency>
 
         <dependency>
             <groupId>net.logstash.logback</groupId>
@@ -58,11 +58,32 @@
             <version>7.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.logging.presentation</groupId>
-            <artifactId>logging-starter</artifactId>
-            <version>7.0</version>
-        </dependency>
+      <dependency>
+        <groupId>org.zalando</groupId>
+        <artifactId>logbook-spring-boot-starter</artifactId>
+      </dependency>
+
+      <dependency>
+        <groupId>org.zalando</groupId>
+        <artifactId>logbook-logstash</artifactId>
+      </dependency>
+
+      <dependency>
+        <groupId>org.zalando</groupId>
+        <artifactId>logbook-openfeign</artifactId>
+      </dependency>
+
+      <dependency>
+        <groupId>io.github.shurupov.logstamp</groupId>
+        <artifactId>logstamp-core-starter</artifactId>
+        <version>0.0.8</version>
+      </dependency>
+
+      <dependency>
+        <groupId>io.github.shurupov.logstamp</groupId>
+        <artifactId>logstamp-kafka-starter</artifactId>
+        <version>0.0.7</version>
+      </dependency>
     </dependencies>
 
     <build>

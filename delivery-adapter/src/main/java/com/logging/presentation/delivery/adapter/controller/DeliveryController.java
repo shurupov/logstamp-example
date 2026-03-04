@@ -1,10 +1,10 @@
-package com.logging.presentation.client.service.controller;
+package com.logging.presentation.delivery.adapter.controller;
 
 import com.logging.presentation.api.DeliveryAdapterApi;
 import com.logging.presentation.api.request.DeliveryCompletedCallbackRequest;
 import com.logging.presentation.api.request.StartDeliveryRequest;
-import com.logging.presentation.client.service.feign.DeliveryExternalSystemClient;
-import com.logging.presentation.client.service.feign.MainServiceClient;
+import com.logging.presentation.delivery.adapter.feign.DeliveryExternalSystemClient;
+import com.logging.presentation.delivery.adapter.feign.MainServiceClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestController;

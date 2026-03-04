@@ -1,8 +1,8 @@
-package com.logging.presentation.client.service.controller;
+package com.logging.presentation.client.adapter.controller;
 
 import com.logging.presentation.api.ClientAdapterApi;
 import com.logging.presentation.api.response.ClientAdapterClientResponse;
-import com.logging.presentation.client.service.feign.ClientExternalSystemClient;
+import com.logging.presentation.client.adapter.feign.ClientExternalSystemClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestController;

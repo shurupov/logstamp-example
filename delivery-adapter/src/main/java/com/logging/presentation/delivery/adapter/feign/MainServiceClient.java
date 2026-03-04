@@ -1,4 +1,4 @@
-package com.logging.presentation.client.service.feign;
+package com.logging.presentation.delivery.adapter.feign;
 
 import com.logging.presentation.api.MainServiceApi;
 import org.springframework.cloud.openfeign.FeignClient;
