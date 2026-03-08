@@ -12,6 +12,7 @@ Current project is an example usage of [logstamp library](https://github.com/shu
   - [client-adapter](#client-adapter)
   - [delivery-adapter](#delivery-adapter)
   - [external-system](#external-system)
+- [How to use](#how-to-use)
 
 ## Project components
 
@@ -45,3 +46,7 @@ ELK configurations are in [elk](elk) folder
 ### external-system
 
 [external-system](external-system) mocks real external system. Doesn't write logs to [ELK](#docker-composeyml-). Doesn't extract, push and pass stamps to log
+
+## How to use
+
+TBD
