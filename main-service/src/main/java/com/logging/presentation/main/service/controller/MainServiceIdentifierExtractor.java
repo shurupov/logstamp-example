@@ -1,8 +1,8 @@
 package com.logging.presentation.main.service.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.logging.presentation.logging.starter.cross.identifier.CachedBodyHttpServletRequest;
-import com.logging.presentation.logging.starter.cross.identifier.CustomIdentifierExtractor;
+import io.github.shurupov.logstamp.CachedBodyHttpServletRequest;
+import io.github.shurupov.logstamp.extractor.HttpRequestStampExtractor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,12 +13,12 @@ import java.util.Map;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class MainServiceIdentifierExtractor implements CustomIdentifierExtractor {
+public class MainServiceIdentifierExtractor implements HttpRequestStampExtractor {
 
     private final ObjectMapper objectMapper;
 
     @Override
-    public Map<String, String> extract(CachedBodyHttpServletRequest request) {
+    public Map<String, String> typedExtract(CachedBodyHttpServletRequest request) {
 
         try {
             if (!request.getServletPath().equals("/v1/claims")) {

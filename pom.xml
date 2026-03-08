@@ -54,7 +54,6 @@
         <module>delivery-adapter</module>
         <module>external-system</module>
         <module>api</module>
-        <module>logging-starter</module>
     </modules>
 
 </project>
