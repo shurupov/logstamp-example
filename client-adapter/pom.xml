@@ -70,19 +70,19 @@
     <dependency>
       <groupId>io.github.shurupov.logstamp</groupId>
       <artifactId>logstamp-core-starter</artifactId>
-      <version>0.0.8</version>
+      <version>0.0.9</version>
     </dependency>
 
     <dependency>
       <groupId>io.github.shurupov.logstamp</groupId>
       <artifactId>logstamp-servlet-starter</artifactId>
-      <version>0.0.7</version>
+      <version>0.0.9</version>
     </dependency>
 
     <dependency>
       <groupId>io.github.shurupov.logstamp</groupId>
       <artifactId>logstamp-openfeign-starter</artifactId>
-      <version>0.0.7</version>
+      <version>0.0.9</version>
     </dependency>
   </dependencies>
 
