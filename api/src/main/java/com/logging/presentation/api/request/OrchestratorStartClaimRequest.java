@@ -2,14 +2,11 @@ package com.logging.presentation.api.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.util.UUID;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class MainServiceStartClaimRequest {
-  private UUID claimId;
+@NoArgsConstructor
+public class OrchestratorStartClaimRequest {
   private Long clientId;
 }

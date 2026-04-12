@@ -7,6 +7,7 @@ import com.logging.presentation.api.request.MainServiceStartClaimRequest;
 import com.logging.presentation.api.response.ClientAdapterClientResponse;
 import com.logging.presentation.api.response.MainServiceOneStartClaimResponse;
 import com.logging.presentation.main.service.feign.ClientAdapterClient;
+import com.logging.presentation.main.service.feign.OrchestratorClient;
 import com.logging.presentation.main.service.scheduled.ScheduledService;
 import com.logging.presentation.main.service.service.DeliveryService;
 import com.logging.presentation.main.service.service.KafkaProducer;
@@ -27,11 +28,16 @@ public class ClaimController implements MainServiceApi {
     private final ScheduledService scheduledService;
     private final StampContext stampContext;
     private final KafkaProducer kafkaProducer;
+    private final OrchestratorClient orchestratorClient;
 
     @Override
     public MainServiceOneStartClaimResponse start(MainServiceStartClaimRequest startClaimRequest) {
-        UUID claimId = UUID.randomUUID();
-        stampContext.add("claimId", claimId.toString());
+        UUID claimId = startClaimRequest.getClaimId();
+        if (claimId == null) {
+          claimId = UUID.randomUUID();
+          stampContext.add("claimId", claimId.toString());
+          log.info("Caught request {}", startClaimRequest);
+        }
         ClientAdapterClientResponse client = clientAdapterClient.getClient(startClaimRequest.getClientId());
         deliveryService.startDelivery(claimId, client);
         scheduledService.addJob(claimId, "Тестовый текст");
@@ -41,6 +47,7 @@ public class ClaimController implements MainServiceApi {
 
     @Override
     public void delivered(UUID claimId, DeliveryCompletedCallbackRequest deliveryCallbackRequest) {
-        log.info("Успех!");
+      orchestratorClient.delivered(claimId);
+      log.info("Успех!");
     }
 }

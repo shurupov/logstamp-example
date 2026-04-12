@@ -43,6 +43,13 @@ services:
     depends_on:
       - elasticsearch
 
+  excamad:
+    image: kotovdenis/excamad:latest
+    container_name: excamad
+    ports:
+      - "9080:8080"  # Левый порт - это порт на вашем компьютере, правый - порт в контейнере
+    restart: unless-stopped
+
   zookeeper:
     image: confluentinc/cp-zookeeper:7.5.0
     hostname: zookeeper

@@ -1,0 +1,25 @@
+server:
+  servlet:
+    context-path: /api
+  port: 8006
+
+spring:
+  application:
+    name: orchestrator
+
+spring.datasource.url: jdbc:h2:file:./camunda-h2-database
+
+camunda:
+  bpm:
+    admin-user:
+      id: demo
+      password: demo
+
+logging:
+  level:
+    root: INFO
+    org.zalando.logbook: TRACE
+    com.logging.presentation: DEBUG
+
+feign:
+  main-service: http://localhost:8001/api
