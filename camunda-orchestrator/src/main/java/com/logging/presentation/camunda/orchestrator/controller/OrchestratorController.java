@@ -3,6 +3,7 @@ package com.logging.presentation.camunda.orchestrator.controller;
 import com.logging.presentation.api.OrchestratorApi;
 import com.logging.presentation.api.request.OrchestratorStartClaimRequest;
 import com.logging.presentation.api.response.OrchestratorStartClaimResponse;
+import io.github.shurupov.logstamp.core.StampContext;
 import java.util.Map;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -15,20 +16,32 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrchestratorController implements OrchestratorApi {
 
   private final RuntimeService runtimeService;
+  private final StampContext stampContext;
 
   @Override
   public OrchestratorStartClaimResponse createClaim(OrchestratorStartClaimRequest request) {
-    ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(
+    if (request.getClaimId() == null) {
+      request.setClaimId(UUID.randomUUID());
+      stampContext.add("claimId", request.getClaimId().toString());
+    }
+
+    runtimeService.startProcessInstanceByKey(
         "process",
-        Map.of("clientId", request.getClientId().toString())
+        request.getClaimId().toString(),
+        Map.of("claimId", request.getClaimId(), "clientId", request.getClientId())
     );
-    return new OrchestratorStartClaimResponse(UUID.fromString(processInstance.getProcessInstanceId()));
+    return new OrchestratorStartClaimResponse(request.getClaimId());
   }
 
   @Override
   public void delivered(UUID claimId) {
-    runtimeService.createMessageCorrelation("DELIVERED")
-        .processInstanceId(claimId.toString())
-        .correlate();
+    ProcessInstance processInstance = runtimeService.createProcessInstanceQuery()
+        .processInstanceBusinessKey(claimId.toString())
+        .singleResult();
+    if (processInstance != null) {
+      runtimeService.createMessageCorrelation("DELIVERED")
+          .processInstanceId(processInstance.getProcessInstanceId())
+          .correlate();
+    }
   }
 }

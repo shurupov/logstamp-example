@@ -76,25 +76,25 @@
     <dependency>
       <groupId>io.github.shurupov.logstamp</groupId>
       <artifactId>logstamp-core-starter</artifactId>
-      <version>0.1.0</version>
+      <version>0.1.7</version>
     </dependency>
 
     <dependency>
       <groupId>io.github.shurupov.logstamp</groupId>
       <artifactId>logstamp-servlet-starter</artifactId>
-      <version>0.1.0</version>
+      <version>0.1.7</version>
     </dependency>
 
     <dependency>
       <groupId>io.github.shurupov.logstamp</groupId>
       <artifactId>logstamp-openfeign-starter</artifactId>
-      <version>0.1.0</version>
+      <version>0.1.7</version>
     </dependency>
 
     <dependency>
       <groupId>io.github.shurupov.logstamp</groupId>
       <artifactId>logstamp-kafka-starter</artifactId>
-      <version>0.1.0</version>
+      <version>0.1.7</version>
     </dependency>
 
   </dependencies>

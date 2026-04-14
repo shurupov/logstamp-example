@@ -19,8 +19,8 @@ public class StartDelegate implements JavaDelegate {
   @Override
   public void execute(DelegateExecution execution) throws Exception {
     mainServiceClient.start(new MainServiceStartClaimRequest(
-        UUID.fromString(execution.getProcessInstanceId()),
-        Long.parseLong(execution.getVariable("clientId").toString())
+        (UUID) execution.getVariable("claimId"),
+        (Long) execution.getVariable("clientId")
     ));
     log.info("Выполнено \"{}\"", execution.getCurrentActivityName());
   }

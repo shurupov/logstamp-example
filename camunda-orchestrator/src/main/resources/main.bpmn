@@ -16,11 +16,11 @@
       <bpmn:outgoing>Flow_0ldz4a7</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_0rf0adc" messageRef="Message_1u844cq" />
     </bpmn:intermediateCatchEvent>
-    <bpmn:serviceTask id="main-start" name="Запуск" camunda:expression="${startDelegate}">
+    <bpmn:serviceTask id="main-start" name="Запуск" camunda:class="com.logging.presentation.camunda.orchestrator.delegate.StartDelegate">
       <bpmn:incoming>Flow_0g3a3th</bpmn:incoming>
       <bpmn:outgoing>Flow_0sl3t8c</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Activity_1oly3j9" name="Успех" camunda:expression="${completeDelegate}">
+    <bpmn:serviceTask id="Activity_1oly3j9" name="Успех" camunda:class="com.logging.presentation.camunda.orchestrator.delegate.CompleteDelegate">
       <bpmn:incoming>Flow_0ldz4a7</bpmn:incoming>
       <bpmn:outgoing>Flow_0qnhzso</bpmn:outgoing>
     </bpmn:serviceTask>
