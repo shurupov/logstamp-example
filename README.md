@@ -22,6 +22,7 @@ Current project is an example usage of [logstamp library](https://github.com/shu
 [docker-compose](docker-compose.yml) contains docker containers used by developed applications
 - elasticsearch, logstash, kibana (ELK)
 - zookeeper, kafka, kafka-ui
+- excamad (ui for `camunda`)
 
 ELK configurations are in [elk](elk) folder
 
