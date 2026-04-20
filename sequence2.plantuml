@@ -1,0 +1,25 @@
+@startuml
+participant "camunda-orchestrator" as camundaOrchestrator
+participant "main-service" as mainService
+participant "client-adapter" as clientAdapter
+participant "delivery-adapter" as deliveryAdapter
+participant "kafka" as kafka
+participant "consumer-service" as consumerService
+participant "external-system" as externalSystem
+
+activate externalSystem
+externalSystem -> deliveryAdapter: PATCH /api/v1/deliveries/{claimId}/delivered
+  activate deliveryAdapter
+  deliveryAdapter -> mainService: PATCH /api/v1/claims/{claimId}/delivered
+    activate mainService
+    mainService -> camundaOrchestrator: PATCH /api/v1/claims/{claimId}/delivered
+      activate camundaOrchestrator
+      camundaOrchestrator --> mainService: 200 OK
+      deactivate camundaOrchestrator
+    mainService --> deliveryAdapter: 200 OK
+    deactivate mainService
+  deliveryAdapter --> externalSystem: 200 OK
+  deactivate deliveryAdapter
+deactivate externalSystem
+
+@enduml

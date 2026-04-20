@@ -1,0 +1,45 @@
+@startuml
+participant "camunda-orchestrator" as camundaOrchestrator
+participant "main-service" as mainService
+participant "client-adapter" as clientAdapter
+participant "delivery-adapter" as deliveryAdapter
+participant "kafka" as kafka
+participant "consumer-service" as consumerService
+participant "external-system" as externalSystem
+
+activate camundaOrchestrator
+camundaOrchestrator -> mainService : POST /api/v1/claims
+  activate mainService
+  mainService -> clientAdapter: GET /api/v1/clients/{clientId}
+    activate clientAdapter
+    clientAdapter -> externalSystem: GET /api/v1/clients/{clientId}
+      activate externalSystem
+      externalSystem --> clientAdapter: 200 OK {...}
+    deactivate externalSystem
+    clientAdapter --> mainService: 200 OK {...}
+  deactivate clientAdapter
+  mainService -> deliveryAdapter: POST /api/v1/deliveries
+    activate deliveryAdapter
+    deliveryAdapter -> externalSystem: POST /api/v1/deliveries
+      activate externalSystem
+      externalSystem --> deliveryAdapter: 200 OK
+      deactivate externalSystem
+    deliveryAdapter --> mainService: 200 OK
+    deactivate deliveryAdapter
+  mainService -> mainService: Создание задания для\n выполнения по расписанию
+  mainService -> kafka: Отправка сообщения
+    activate kafka
+  mainService --> camundaOrchestrator: 200 OK
+  deactivate mainService
+deactivate camundaOrchestrator
+    kafka -> consumerService: Чтение сообщения
+    deactivate kafka
+activate consumerService
+consumerService -> consumerService: Обработка сообщения
+deactivate consumerService
+
+activate mainService
+mainService -> mainService: Запуск задания по расписанию
+deactivate mainService
+
+@enduml
