@@ -7,6 +7,7 @@ Current project is an example usage of [logstamp library](https://github.com/shu
 - [Project components](#project-components)
   - [docker-compose.yml](#docker-composeyml-)
   - [api](#api)
+  - [camunda-orchestrator](#camunda-orchestrator)
   - [main-service](#main-service)
   - [consumer-service](#consumer-service)
   - [client-adapter](#client-adapter)
@@ -27,9 +28,13 @@ ELK configurations are in [elk](elk) folder
 ### api
 [api](api) of rest and kafka communications
 
+### camunda-orchestrator
+
+[camunda-orchestrator](camunda-orchestrator) starts camunda process, creates `claimId` stamp (if not passed), performs rest interactions encapsulated in camunda java delegates
+
 ### main-service
 
-[main-service](main-service) starts process, creates `claimId` stamp, performs rest interactions, sends kafka message, creates and ans executes scheduled jobs. Every outcoming interaction passes stamps to next service. Writes logs to [ELK](#docker-composeyml-)
+[main-service](main-service) starts process, creates `claimId` stamp (if not passed), performs rest interactions, sends kafka message, creates and ans executes scheduled jobs. Every outcoming interaction passes stamps to next service. Writes logs to [ELK](#docker-composeyml-)
 
 ### consumer-service
 
