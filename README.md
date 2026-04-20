@@ -30,7 +30,7 @@ ELK configurations are in [elk](elk) folder
 
 ### camunda-orchestrator
 
-[camunda-orchestrator](camunda-orchestrator) starts camunda process, creates `claimId` stamp (if not passed), performs rest interactions encapsulated in camunda java delegates
+[camunda-orchestrator](camunda-orchestrator) starts camunda process, creates `claimId` stamp (if not passed), performs rest interactions encapsulated in camunda java delegates. Uses `camunda` framework.
 
 ### main-service
 
