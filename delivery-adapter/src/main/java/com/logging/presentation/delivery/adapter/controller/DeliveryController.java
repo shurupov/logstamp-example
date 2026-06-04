@@ -25,7 +25,7 @@ public class DeliveryController implements DeliveryAdapterApi {
     }
 
     @Override
-    public void delivered(UUID claimId, DeliveryCompletedCallbackRequest deliveryCallbackRequest) {
-        mainServiceClient.delivered(claimId, deliveryCallbackRequest);
+    public void delivered(UUID executionId, DeliveryCompletedCallbackRequest deliveryCallbackRequest) {
+        mainServiceClient.delivered(executionId, deliveryCallbackRequest);
     }
 }

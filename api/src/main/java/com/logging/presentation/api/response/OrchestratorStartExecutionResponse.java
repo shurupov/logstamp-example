@@ -1,14 +1,13 @@
 package com.logging.presentation.api.response;
 
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MainServiceOneStartClaimResponse {
-    private UUID claimId;
+public class OrchestratorStartExecutionResponse {
+  private UUID executionId;
 }

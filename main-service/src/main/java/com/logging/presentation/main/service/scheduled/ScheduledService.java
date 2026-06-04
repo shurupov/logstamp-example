@@ -20,8 +20,8 @@ public class ScheduledService {
 
     private final JobService jobService;
 
-    public void addJob(UUID claimId, String text) {
-        jobs.put(claimId, text);
+    public void addJob(UUID executionId, String text) {
+        jobs.put(executionId, text);
     }
 
     @Scheduled(cron = "*/20 * * * * *")

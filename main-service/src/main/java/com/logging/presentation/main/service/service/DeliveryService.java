@@ -18,9 +18,9 @@ public class DeliveryService {
     private final DeliveryAdapterClient deliveryAdapterClient;
 
     @Async
-    public void startDelivery(UUID claimId, ClientAdapterClientResponse client) {
+    public void startDelivery(UUID executionId, ClientAdapterClientResponse client) {
         StartDeliveryRequest request = new StartDeliveryRequest(
-                claimId,
+                executionId,
                 client.getFirstName() + " " + client.getLastName(),
                 client.getPhone(),
                 client.getAddress()

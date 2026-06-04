@@ -1,11 +1,11 @@
 package com.logging.presentation.main.service.controller;
 
 import com.logging.presentation.api.MainServiceApi;
-import com.logging.presentation.api.kafka.ClaimEvent;
+import com.logging.presentation.api.kafka.ExecutionEvent;
 import com.logging.presentation.api.request.DeliveryCompletedCallbackRequest;
-import com.logging.presentation.api.request.MainServiceStartClaimRequest;
+import com.logging.presentation.api.request.MainServiceStartExecutionRequest;
 import com.logging.presentation.api.response.ClientAdapterClientResponse;
-import com.logging.presentation.api.response.MainServiceOneStartClaimResponse;
+import com.logging.presentation.api.response.MainServiceOneStartExecutionResponse;
 import com.logging.presentation.main.service.feign.ClientAdapterClient;
 import com.logging.presentation.main.service.feign.OrchestratorClient;
 import com.logging.presentation.main.service.scheduled.ScheduledService;
@@ -31,23 +31,23 @@ public class ClaimController implements MainServiceApi {
     private final OrchestratorClient orchestratorClient;
 
     @Override
-    public MainServiceOneStartClaimResponse start(MainServiceStartClaimRequest startClaimRequest) {
-        UUID claimId = startClaimRequest.getClaimId();
-        if (claimId == null) {
-          claimId = UUID.randomUUID();
-          stampContext.add("claimId", claimId.toString());
-          log.info("Caught request {}", startClaimRequest);
+    public MainServiceOneStartExecutionResponse start(MainServiceStartExecutionRequest startExecutionRequest) {
+        UUID executionId = startExecutionRequest.getExecutionId();
+        if (executionId == null) {
+          executionId = UUID.randomUUID();
+          stampContext.add("executionId", executionId.toString());
+          log.info("Caught request {}", startExecutionRequest);
         }
-        ClientAdapterClientResponse client = clientAdapterClient.getClient(startClaimRequest.getClientId());
-        deliveryService.startDelivery(claimId, client);
-        scheduledService.addJob(claimId, "Тестовый текст");
-        kafkaProducer.sendMessage(new ClaimEvent(claimId, "Текст сообщения"));
-        return new MainServiceOneStartClaimResponse(claimId);
+        ClientAdapterClientResponse client = clientAdapterClient.getClient(startExecutionRequest.getClientId());
+        deliveryService.startDelivery(executionId, client);
+        scheduledService.addJob(executionId, "Тестовый текст");
+        kafkaProducer.sendMessage(new ExecutionEvent(executionId, "Текст сообщения"));
+        return new MainServiceOneStartExecutionResponse(executionId);
     }
 
     @Override
-    public void delivered(UUID claimId, DeliveryCompletedCallbackRequest deliveryCallbackRequest) {
-      orchestratorClient.delivered(claimId);
+    public void delivered(UUID executionId, DeliveryCompletedCallbackRequest deliveryCallbackRequest) {
+      orchestratorClient.delivered(executionId);
       log.info("Успех!");
     }
 }

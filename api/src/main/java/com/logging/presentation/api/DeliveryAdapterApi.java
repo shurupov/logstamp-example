@@ -14,6 +14,6 @@ public interface DeliveryAdapterApi {
     @PostMapping("/v1/deliveries")
     void startDelivery(StartDeliveryRequest startDeliveryRequest);
 
-    @PatchMapping("/v1/deliveries/{claimId}/delivered")
-    void delivered(@PathVariable(name = "claimId") UUID claimId, @RequestBody DeliveryCompletedCallbackRequest deliveryCallbackRequest);
+    @PatchMapping("/v1/executions/{executionId}/delivered")
+    void delivered(@PathVariable(name = "executionId") UUID executionId, @RequestBody DeliveryCompletedCallbackRequest deliveryCallbackRequest);
 }

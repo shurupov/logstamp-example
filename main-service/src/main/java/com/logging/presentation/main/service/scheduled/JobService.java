@@ -13,12 +13,12 @@ public class JobService {
 
     @AddStamps(initiator = "scheduler")
     public void doJob(Job job) {
-        log.info("Выполнение запланированной задачи: {}: {}", job.getClaimId(), job.getText());
+        log.info("Выполнение запланированной задачи: {}: {}", job.getExecutionId(), job.getText());
     }
 
     @Value
     public static class Job {
-        UUID claimId;
+        UUID executionId;
         String text;
     }
 }

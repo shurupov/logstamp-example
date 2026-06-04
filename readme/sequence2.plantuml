@@ -8,11 +8,11 @@ participant "consumer-service" as consumerService
 participant "external-system" as externalSystem
 
 activate externalSystem
-externalSystem -> deliveryAdapter: PATCH /api/v1/deliveries/{claimId}/delivered
+externalSystem -> deliveryAdapter: PATCH /api/v1/executions/{executionId}/delivered
   activate deliveryAdapter
-  deliveryAdapter -> mainService: PATCH /api/v1/claims/{claimId}/delivered
+  deliveryAdapter -> mainService: PATCH /api/v1/executions/{executionId}/delivered
     activate mainService
-    mainService -> camundaOrchestrator: PATCH /api/v1/claims/{claimId}/delivered
+    mainService -> camundaOrchestrator: PATCH /api/v1/executions/{executionId}/delivered
       activate camundaOrchestrator
       camundaOrchestrator --> mainService: 200 OK
       deactivate camundaOrchestrator

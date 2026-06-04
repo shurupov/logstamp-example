@@ -31,11 +31,11 @@ ELK configurations are in [elk](elk) folder
 
 ### camunda-orchestrator
 
-[camunda-orchestrator](camunda-orchestrator) starts camunda process, creates `claimId` stamp (if not passed), performs rest interactions encapsulated in camunda java delegates. Uses `camunda` framework.
+[camunda-orchestrator](camunda-orchestrator) starts camunda process, creates `executionId` stamp (if not passed), performs rest interactions encapsulated in camunda java delegates. Uses `camunda` framework.
 
 ### main-service
 
-[main-service](main-service) starts process, creates `claimId` stamp (if not passed), performs rest interactions, sends kafka message, creates and ans executes scheduled jobs. Every outcoming interaction passes stamps to next service. Writes logs to [ELK](#docker-composeyml-)
+[main-service](main-service) starts process, creates `executionId` stamp (if not passed), performs rest interactions, sends kafka message, creates and ans executes scheduled jobs. Every outcoming interaction passes stamps to next service. Writes logs to [ELK](#docker-composeyml-)
 
 ### consumer-service
 

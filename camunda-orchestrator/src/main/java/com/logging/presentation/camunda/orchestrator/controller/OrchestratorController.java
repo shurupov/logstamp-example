@@ -1,8 +1,8 @@
 package com.logging.presentation.camunda.orchestrator.controller;
 
 import com.logging.presentation.api.OrchestratorApi;
-import com.logging.presentation.api.request.OrchestratorStartClaimRequest;
-import com.logging.presentation.api.response.OrchestratorStartClaimResponse;
+import com.logging.presentation.api.request.OrchestratorStartExecutionRequest;
+import com.logging.presentation.api.response.OrchestratorStartExecutionResponse;
 import io.github.shurupov.logstamp.core.StampContext;
 import java.util.Map;
 import java.util.UUID;
@@ -19,24 +19,24 @@ public class OrchestratorController implements OrchestratorApi {
   private final StampContext stampContext;
 
   @Override
-  public OrchestratorStartClaimResponse createClaim(OrchestratorStartClaimRequest request) {
-    if (request.getClaimId() == null) {
-      request.setClaimId(UUID.randomUUID());
-      stampContext.add("claimId", request.getClaimId().toString());
+  public OrchestratorStartExecutionResponse createClaim(OrchestratorStartExecutionRequest request) {
+    if (request.getExecutionId() == null) {
+      request.setExecutionId(UUID.randomUUID());
+      stampContext.add("executionId", request.getExecutionId().toString());
     }
 
     runtimeService.startProcessInstanceByKey(
         "process",
-        request.getClaimId().toString(),
-        Map.of("claimId", request.getClaimId(), "clientId", request.getClientId())
+        request.getExecutionId().toString(),
+        Map.of("executionId", request.getExecutionId(), "clientId", request.getClientId())
     );
-    return new OrchestratorStartClaimResponse(request.getClaimId());
+    return new OrchestratorStartExecutionResponse(request.getExecutionId());
   }
 
   @Override
-  public void delivered(UUID claimId) {
+  public void delivered(UUID executionId) {
     ProcessInstance processInstance = runtimeService.createProcessInstanceQuery()
-        .processInstanceBusinessKey(claimId.toString())
+        .processInstanceBusinessKey(executionId.toString())
         .singleResult();
     if (processInstance != null) {
       runtimeService.createMessageCorrelation("DELIVERED")

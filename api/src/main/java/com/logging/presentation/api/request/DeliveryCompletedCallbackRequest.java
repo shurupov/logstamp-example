@@ -6,7 +6,7 @@ import lombok.Data;
 public class DeliveryCompletedCallbackRequest {
 
     private DeliveryStatus status;
-    private String pseudoPan;
+    private String comment;
 
     public enum DeliveryStatus {
         SUCCESS,

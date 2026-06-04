@@ -2,7 +2,7 @@ package com.logging.presentation.main.service.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.logging.presentation.api.kafka.ClaimEvent;
+import com.logging.presentation.api.kafka.ExecutionEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -19,18 +19,18 @@ public class KafkaProducer {
     @Value("${kafka.topic:claim}")
     private final String kafkaTopic;
 
-    private final KafkaTemplate<String, ClaimEvent> kafkaTemplate;
+    private final KafkaTemplate<String, ExecutionEvent> kafkaTemplate;
     private final ObjectMapper objectMapper;
 
-    public void sendMessage(ClaimEvent claimEvent) {
-        String claimId = claimEvent.getClaimId().toString();
-        ProducerRecord<String, ClaimEvent> producerRecord = new ProducerRecord<>(kafkaTopic, claimId, claimEvent);
+    public void sendMessage(ExecutionEvent executionEvent) {
+        String executionId = executionEvent.getExecutionId().toString();
+        ProducerRecord<String, ExecutionEvent> producerRecord = new ProducerRecord<>(kafkaTopic, executionId, executionEvent);
 
       try {
-        MDC.put("kafka.body", objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(claimEvent));
+        MDC.put("kafka.body", objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(executionEvent));
         MDC.put("kafka.action", "produce");
         MDC.put("kafka.topic", "claim");
-        log.trace("{} sent:", claimEvent.getClass().getSimpleName());
+        log.trace("{} sent:", executionEvent.getClass().getSimpleName());
       } catch (JsonProcessingException e) {
         log.warn(e.getMessage(), e);
       }

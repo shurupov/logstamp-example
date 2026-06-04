@@ -1,6 +1,6 @@
 package com.logging.presentation.camunda.orchestrator.delegate;
 
-import com.logging.presentation.api.request.MainServiceStartClaimRequest;
+import com.logging.presentation.api.request.MainServiceStartExecutionRequest;
 import com.logging.presentation.camunda.orchestrator.feign.MainServiceClient;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -18,8 +18,8 @@ public class StartDelegate implements JavaDelegate {
 
   @Override
   public void execute(DelegateExecution execution) throws Exception {
-    mainServiceClient.start(new MainServiceStartClaimRequest(
-        (UUID) execution.getVariable("claimId"),
+    mainServiceClient.start(new MainServiceStartExecutionRequest(
+        (UUID) execution.getVariable("executionId"),
         (Long) execution.getVariable("clientId")
     ));
     log.info("Выполнено \"{}\"", execution.getCurrentActivityName());

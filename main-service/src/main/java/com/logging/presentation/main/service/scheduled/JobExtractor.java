@@ -15,6 +15,6 @@ public class JobExtractor implements StampExtractor<Job> {
 
   @Override
   public Map<String, String> typedExtract(Job job) {
-    return Map.of("claimId", job.getClaimId().toString());
+    return Map.of("executionId", job.getExecutionId().toString());
   }
 }

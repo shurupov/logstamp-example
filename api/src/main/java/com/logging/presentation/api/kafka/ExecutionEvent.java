@@ -9,7 +9,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClaimEvent {
-    private UUID claimId;
+public class ExecutionEvent {
+    private UUID executionId;
     private String content;
 }

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class ClaimIdStampExtractor implements HttpRequestStampExtractor {
+public class ExecutionIdStampExtractor implements HttpRequestStampExtractor {
 
   private final ObjectMapper objectMapper;
 
@@ -19,9 +19,9 @@ public class ClaimIdStampExtractor implements HttpRequestStampExtractor {
   public Map<String, String> typedExtract(CachedBodyHttpServletRequest container) throws Exception {
     String body = container.getBodyAsString();
     try {
-      ClaimIdContainer claimIdContainer = objectMapper.readValue(body, ClaimIdContainer.class);
-      if (claimIdContainer.claimId != null) {
-        return Map.of("claimId", claimIdContainer.claimId.toString());
+      ExecutionIdContainer executionIdContainer = objectMapper.readValue(body, ExecutionIdContainer.class);
+      if (executionIdContainer.executionId != null) {
+        return Map.of("executionId", executionIdContainer.executionId.toString());
       }
     } catch (Exception ignore) {
     }
@@ -29,7 +29,7 @@ public class ClaimIdStampExtractor implements HttpRequestStampExtractor {
   }
 
   @Data
-  protected static class ClaimIdContainer {
-    private UUID claimId;
+  protected static class ExecutionIdContainer {
+    private UUID executionId;
   }
 }

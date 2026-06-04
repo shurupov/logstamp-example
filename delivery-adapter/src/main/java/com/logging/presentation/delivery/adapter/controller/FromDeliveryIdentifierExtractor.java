@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 @RequiredArgsConstructor
 public class FromDeliveryIdentifierExtractor implements HttpRequestStampExtractor {
 
-    private static final Pattern URL_CALLBACK_PATTERN = Pattern.compile("/v1/deliveries/([^/]+)/delivered");
+    private static final Pattern URL_CALLBACK_PATTERN = Pattern.compile("/v1/executions/([^/]+)/delivered");
 
     @Override
     public Map<String, String> typedExtract(CachedBodyHttpServletRequest request) {
@@ -28,11 +28,11 @@ public class FromDeliveryIdentifierExtractor implements HttpRequestStampExtracto
                 return Map.of();
             }
 
-            String textClaimId = matcher.group(1);
+            String textExecutionId = matcher.group(1);
 
-            return Map.of("claimId", textClaimId);
+            return Map.of("executionId", textExecutionId);
         } catch (Exception e) {
-            log.warn("Не удалось вычитать параметр claimId из запроса", e);
+            log.warn("Не удалось вычитать параметр executionId из запроса", e);
             return Map.of();
         }
     }
